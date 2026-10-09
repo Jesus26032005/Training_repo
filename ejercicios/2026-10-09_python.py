@@ -27,8 +27,7 @@
 #   saludo("Ana")    ->  "¡Hola, Ana!"
 # =============================================================================
 def saludo(nombre):
-    # TODO: tu solución aquí
-    raise NotImplementedError
+    return str(f"¡Hola, {nombre}!")
 
 
 # =============================================================================
@@ -42,8 +41,7 @@ def saludo(nombre):
 #   area_rectangulo(2.5, 2)  ->  5.0
 # =============================================================================
 def area_rectangulo(base, altura):
-    # TODO: tu solución aquí
-    raise NotImplementedError
+    return base * altura
 
 
 # =============================================================================
@@ -57,8 +55,7 @@ def area_rectangulo(base, altura):
 #   celsius_a_fahrenheit(100)  ->  212.0
 # =============================================================================
 def celsius_a_fahrenheit(celsius):
-    # TODO: tu solución aquí
-    raise NotImplementedError
+    return celsius * 9 / 5 +32
 
 
 # =============================================================================
@@ -73,8 +70,10 @@ def celsius_a_fahrenheit(celsius):
 #   es_par(7)  ->  False
 # =============================================================================
 def es_par(n):
-    # TODO: tu solución aquí
-    raise NotImplementedError
+    if n%2==0:
+        return True
+    else:
+        return False
 
 
 # =============================================================================
@@ -89,8 +88,7 @@ def es_par(n):
 #   suma_de_textos("5", "-2")   ->  3
 # =============================================================================
 def suma_de_textos(a, b):
-    # TODO: tu solución aquí
-    raise NotImplementedError
+    return int(a) + int(b)
 
 
 # =============================================================================
@@ -108,8 +106,16 @@ def suma_de_textos(a, b):
 #   tipo_de_dato("hola") ->  "texto"
 # =============================================================================
 def tipo_de_dato(valor):
-    # TODO: tu solución aquí
-    raise NotImplementedError
+    if isinstance(valor,bool):
+        return "booleano"
+    if isinstance(valor, int):
+        return "entero"
+    elif isinstance(valor,float):
+        return "decimal"
+    elif isinstance(valor,str):
+        return "texto"
+    else:
+        return "otro tipo"
 
 
 # =============================================================================
@@ -124,8 +130,11 @@ def tipo_de_dato(valor):
 #   mayor_de_tres(9, 2, 9)  ->  9
 # =============================================================================
 def mayor_de_tres(a, b, c):
-    # TODO: tu solución aquí
-    raise NotImplementedError
+    if a>b and a>c:
+            return a
+    elif b>a and b>c:
+            return b
+    else: return c
 
 
 # =============================================================================
@@ -144,8 +153,16 @@ def mayor_de_tres(a, b, c):
 #   clasificar_edad(70)  ->  "adulto mayor"
 # =============================================================================
 def clasificar_edad(edad):
-    # TODO: tu solución aquí
-    raise NotImplementedError
+    if edad > 0 and edad <=11:
+        return "niño"
+    elif edad <= 17:
+        return "adolescente"
+    elif edad <= 64:
+        return "adulto"
+    elif edad >= 65:
+        return "adulto mayor"
+    else:
+        return "desconocido"
 
 
 # =============================================================================
@@ -164,8 +181,14 @@ def clasificar_edad(edad):
 #   total_con_descuento(19.99, 10) ->  159.92
 # =============================================================================
 def total_con_descuento(precio, cantidad):
-    # TODO: tu solución aquí
-    raise NotImplementedError
+    precio_final = precio*cantidad
+    if cantidad > 4 and cantidad <= 9:
+        precio_final -= precio*cantidad*0.10
+    elif cantidad > 9:
+        precio_final -= precio*cantidad*0.20
+    else:
+        precio_final = precio_final
+    return round(precio_final,2)
 
 
 # =============================================================================
@@ -182,8 +205,10 @@ def total_con_descuento(precio, cantidad):
 #   es_bisiesto(2000)  ->  True    (divisible entre 400)
 # =============================================================================
 def es_bisiesto(anio):
-    # TODO: tu solución aquí
-    raise NotImplementedError
+    if (anio%4 == 0 and anio%100!=0) or (anio%400==0 and anio%100==0):
+        return True
+    else:
+        return False
 
 
 # =============================================================================
