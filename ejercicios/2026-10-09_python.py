@@ -145,9 +145,9 @@ def tipo_de_dato(valor):
 # PISTA: piensa qué comparación (`>` vs `>=`) deja de "descartar" a un número cuando hay empate.
 # Ojo: arreglarlo puede cambiar más de una condición. Pruébalo con (5,5,3), (5,3,5) y (3,5,5).
 def mayor_de_tres(a, b, c):
-    if a>b and a>c:
+    if a>=b and a>=c:
             return a
-    elif b>a and b>c:
+    elif b>=a and b>=c:
             return b
     else: return c
 
@@ -172,7 +172,7 @@ def mayor_de_tres(a, b, c):
 # El enunciado dice "0 a 11 -> niño", o sea que el 0 SÍ cuenta.
 # PISTA: revisa el límite inferior del primer if. ¿Necesitas `>`, o `>=`, o siquiera esa condición?
 def clasificar_edad(edad):
-    if edad > 0 and edad <=11:
+    if edad >= 0 and edad <=11:
         return "niño"
     elif edad <= 17:
         return "adolescente"
