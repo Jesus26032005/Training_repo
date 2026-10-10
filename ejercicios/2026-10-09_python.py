@@ -26,6 +26,8 @@
 #   saludo("Jesús")  ->  "¡Hola, Jesús!"
 #   saludo("Ana")    ->  "¡Hola, Ana!"
 # =============================================================================
+# RETRO: ¡Bien! El f-string está perfecto y devuelve justo lo pedido.
+# Mejora opcional: el f-string ya es un texto, así que `str(...)` sobra; basta `return f"¡Hola, {nombre}!"`.
 def saludo(nombre):
     return str(f"¡Hola, {nombre}!")
 
@@ -40,6 +42,7 @@ def saludo(nombre):
 #   area_rectangulo(3, 4)    ->  12
 #   area_rectangulo(2.5, 2)  ->  5.0
 # =============================================================================
+# RETRO: Correcto y directo: base * altura funciona con enteros y decimales sin más. Nada que mejorar.
 def area_rectangulo(base, altura):
     return base * altura
 
@@ -54,6 +57,8 @@ def area_rectangulo(base, altura):
 #   celsius_a_fahrenheit(0)    ->  32.0
 #   celsius_a_fahrenheit(100)  ->  212.0
 # =============================================================================
+# RETRO: Muy bien, la fórmula está bien traducida y el orden de operaciones es correcto.
+# Mejora opcional de estilo: deja un espacio alrededor del operador (`+ 32`) para que se lea mejor (PEP 8).
 def celsius_a_fahrenheit(celsius):
     return celsius * 9 / 5 +32
 
@@ -69,6 +74,8 @@ def celsius_a_fahrenheit(celsius):
 #   es_par(4)  ->  True
 #   es_par(7)  ->  False
 # =============================================================================
+# RETRO: Correcto, usaste bien el residuo (%) y cubres pares e impares (también negativos).
+# Mejora opcional: `n % 2 == 0` ya ES un True/False, así que puedes escribir solo `return n % 2 == 0`.
 def es_par(n):
     if n%2==0:
         return True
@@ -87,6 +94,7 @@ def es_par(n):
 #   suma_de_textos("12", "30")  ->  42
 #   suma_de_textos("5", "-2")   ->  3
 # =============================================================================
+# RETRO: Perfecto: convertir con int() antes de sumar es justo la idea. Funciona incluso con "-2".
 def suma_de_textos(a, b):
     return int(a) + int(b)
 
@@ -105,6 +113,8 @@ def suma_de_textos(a, b):
 #   tipo_de_dato(True)   ->  "booleano"
 #   tipo_de_dato("hola") ->  "texto"
 # =============================================================================
+# RETRO: Excelente, entendiste la trampa: revisar bool ANTES que int es la clave. Buen manejo del `else` final.
+# Mejora opcional: usar `if / if / if` (sin elif) también sirve porque cada rama hace return.
 def tipo_de_dato(valor):
     if isinstance(valor,bool):
         return "booleano"
@@ -129,6 +139,11 @@ def tipo_de_dato(valor):
 #   mayor_de_tres(1, 5, 3)  ->  5
 #   mayor_de_tres(9, 2, 9)  ->  9
 # =============================================================================
+# RETRO: Pasa las pruebas básicas y la estructura if/elif/else está clara, buen trabajo.
+# Pero tiene un caso escondido que falla: prueba mayor_de_tres(5, 5, 3). Debería dar 5.
+# ¿Qué pasa? `a > b` es falso (son iguales), `b > a` también, y se va al `else`... que devuelve c.
+# PISTA: piensa qué comparación (`>` vs `>=`) deja de "descartar" a un número cuando hay empate.
+# Ojo: arreglarlo puede cambiar más de una condición. Pruébalo con (5,5,3), (5,3,5) y (3,5,5).
 def mayor_de_tres(a, b, c):
     if a>b and a>c:
             return a
@@ -152,6 +167,10 @@ def mayor_de_tres(a, b, c):
 #   clasificar_edad(18)  ->  "adulto"
 #   clasificar_edad(70)  ->  "adulto mayor"
 # =============================================================================
+# RETRO: Buena estructura: los elif encadenados con `<=` evitan repetir límites inferiores. ¡Bien pensado!
+# Pero falla con edad 0 (un recién nacido): el primer `if` exige `edad > 0`, así que 0 cae en "adolescente".
+# El enunciado dice "0 a 11 -> niño", o sea que el 0 SÍ cuenta.
+# PISTA: revisa el límite inferior del primer if. ¿Necesitas `>`, o `>=`, o siquiera esa condición?
 def clasificar_edad(edad):
     if edad > 0 and edad <=11:
         return "niño"
@@ -180,6 +199,9 @@ def clasificar_edad(edad):
 #   total_con_descuento(100, 5)   ->  450.0
 #   total_con_descuento(19.99, 10) ->  159.92
 # =============================================================================
+# RETRO: Bien resuelto: calculas el total una vez y le restas el descuento según el rango. Los límites 4/5/9/10 están bien.
+# Mejora opcional: el `else: precio_final = precio_final` no hace nada y se puede quitar.
+# Idea idiomática: guardar el porcentaje (0, 0.10, 0.20) en una variable según la cantidad y al final `total * (1 - descuento)`.
 def total_con_descuento(precio, cantidad):
     precio_final = precio*cantidad
     if cantidad > 4 and cantidad <= 9:
@@ -204,6 +226,9 @@ def total_con_descuento(precio, cantidad):
 #   es_bisiesto(1900)  ->  False   (divisible entre 100 pero no entre 400)
 #   es_bisiesto(2000)  ->  True    (divisible entre 400)
 # =============================================================================
+# RETRO: Correcto, ¡buen ejercicio difícil! Tu lógica respeta la regla completa (4, 100 y 400).
+# Mejora opcional: `anio % 400 == 0` ya implica `anio % 100 == 0`, así que basta `(anio % 4 == 0 and anio % 100 != 0) or anio % 400 == 0`.
+# Y como antes, puedes devolver la condición directamente en vez de if/else.
 def es_bisiesto(anio):
     if (anio%4 == 0 and anio%100!=0) or (anio%400==0 and anio%100==0):
         return True
@@ -264,8 +289,12 @@ PRUEBAS = [
         ((-1, -5, -3), -1),
         ((4, 4, 4), 4),
         ((7, 1, 2), 7),
+        ((5, 5, 3), 5),
+        ((3, 5, 5), 5),
+        ((5, 3, 5), 5),
     ]),
     (8, "Clasificar por edad", "clasificar_edad", [
+        ((0,), "niño"),
         ((5,), "niño"),
         ((11,), "niño"),
         ((12,), "adolescente"),
