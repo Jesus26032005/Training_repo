@@ -139,11 +139,9 @@ def tipo_de_dato(valor):
 #   mayor_de_tres(1, 5, 3)  ->  5
 #   mayor_de_tres(9, 2, 9)  ->  9
 # =============================================================================
-# RETRO: Pasa las pruebas básicas y la estructura if/elif/else está clara, buen trabajo.
-# Pero tiene un caso escondido que falla: prueba mayor_de_tres(5, 5, 3). Debería dar 5.
-# ¿Qué pasa? `a > b` es falso (son iguales), `b > a` también, y se va al `else`... que devuelve c.
-# PISTA: piensa qué comparación (`>` vs `>=`) deja de "descartar" a un número cuando hay empate.
-# Ojo: arreglarlo puede cambiar más de una condición. Pruébalo con (5,5,3), (5,3,5) y (3,5,5).
+# RETRO (actualizada): ¡Corregido! Cambiar a `>=` hizo que un empate ya no "descarte" al número, y ahora (5,5,3), (5,3,5) y (3,5,5) dan 5.
+# Aprendiste algo clave: los límites (< vs <=) importan justo en los empates. Mejora opcional: pon el `return` en la misma
+# línea de sangría normal (4 espacios) y el `else:` en su propia línea, así se lee más limpio.
 def mayor_de_tres(a, b, c):
     if a>=b and a>=c:
             return a
@@ -167,10 +165,8 @@ def mayor_de_tres(a, b, c):
 #   clasificar_edad(18)  ->  "adulto"
 #   clasificar_edad(70)  ->  "adulto mayor"
 # =============================================================================
-# RETRO: Buena estructura: los elif encadenados con `<=` evitan repetir límites inferiores. ¡Bien pensado!
-# Pero falla con edad 0 (un recién nacido): el primer `if` exige `edad > 0`, así que 0 cae en "adolescente".
-# El enunciado dice "0 a 11 -> niño", o sea que el 0 SÍ cuenta.
-# PISTA: revisa el límite inferior del primer if. ¿Necesitas `>`, o `>=`, o siquiera esa condición?
+# RETRO (actualizada): ¡Corregido! Con `edad >= 0` el 0 ya cuenta como "niño". Y mantuviste los `elif` encadenados, que es lo más limpio.
+# Mejora opcional: en Python puedes escribir `0 <= edad <= 11` en lugar de `edad >= 0 and edad <= 11`.
 def clasificar_edad(edad):
     if edad >= 0 and edad <=11:
         return "niño"
