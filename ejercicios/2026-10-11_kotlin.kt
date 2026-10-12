@@ -29,10 +29,8 @@
 //   saludar("Ana")    ->  "¡Hola, Ana! Bienvenido a Kotlin"
 // =============================================================================
 fun saludar(nombre: String): String {
-    // TODO: tu solución aquí
-    TODO("tu solución aquí")
+    return "¡Hola, $nombre! Bienvenido a Kotlin"
 }
-
 
 // =============================================================================
 // EJERCICIO 2 · Perímetro de un rectángulo
@@ -45,10 +43,8 @@ fun saludar(nombre: String): String {
 //   perimetroRectangulo(5, 5)  ->  20
 // =============================================================================
 fun perimetroRectangulo(base: Int, altura: Int): Int {
-    // TODO: tu solución aquí
-    TODO("tu solución aquí")
+    return 2 * (base + altura)
 }
-
 
 // =============================================================================
 // EJERCICIO 3 · Promedio de tres notas
@@ -63,10 +59,11 @@ fun perimetroRectangulo(base: Int, altura: Int): Int {
 //   promedio(7, 8, 8)   ->  7.666666666666667
 // =============================================================================
 fun promedio(a: Int, b: Int, c: Int): Double {
-    // TODO: tu solución aquí
-    TODO("tu solución aquí")
+    a= a.toFloat()
+    b = b.toFloat()
+    c= c.toFloat()
+    return a+b+c/3
 }
-
 
 // =============================================================================
 // EJERCICIO 4 · El mayor de dos (if como expresión)
@@ -80,10 +77,12 @@ fun promedio(a: Int, b: Int, c: Int): Double {
 //   mayorDeDos(10, 10) ->  10
 // =============================================================================
 fun mayorDeDos(a: Int, b: Int): Int {
-    // TODO: tu solución aquí
-    TODO("tu solución aquí")
+    if (a >= b) {
+        return a
+    } else {
+        return b
+    }
 }
-
 
 // =============================================================================
 // EJERCICIO 5 · ¿Es vocal?
@@ -99,8 +98,14 @@ fun mayorDeDos(a: Int, b: Int): Int {
 //   esVocal('z')  ->  false
 // =============================================================================
 fun esVocal(c: Char): Boolean {
-    // TODO: tu solución aquí
-    TODO("tu solución aquí")
+    when (c) {
+        "a" -> return true
+        "e" -> return true
+        "i" -> return true
+        "o" -> return true
+        "u" -> return true
+        else -> return false
+    }
 }
 
 
@@ -118,8 +123,16 @@ fun esVocal(c: Char): Boolean {
 //   nombreDelDia(9)  ->  "inválido"
 // =============================================================================
 fun nombreDelDia(numero: Int): String {
-    // TODO: tu solución aquí
-    TODO("tu solución aquí")
+    when (numero) {
+        1 -> return "lunes"
+        2 -> return "martes"
+        3 -> return "miércoles"
+        4 -> return "jueves"
+        5 -> return "viernes"
+        6 -> return "sábado"
+        7 -> return "domingo"
+        else -> return "inválido"
+    }
 }
 
 
@@ -136,8 +149,7 @@ fun nombreDelDia(numero: Int): String {
 //   estaEnRango(11, 1, 10)  ->  false
 // =============================================================================
 fun estaEnRango(n: Int, desde: Int, hasta: Int): Boolean {
-    // TODO: tu solución aquí
-    TODO("tu solución aquí")
+    return n in desde..hasta
 }
 
 
@@ -156,8 +168,10 @@ fun estaEnRango(n: Int, desde: Int, hasta: Int): Boolean {
 //   sumaDeRango(5, 1)  ->  0
 // =============================================================================
 fun sumaDeRango(inicio: Int, fin: Int): Int {
-    // TODO: tu solución aquí
-    TODO("tu solución aquí")
+    if (inicio > fin) {
+        return 0
+    }
+    return (inicio..fin).sum()
 }
 
 
@@ -176,8 +190,14 @@ fun sumaDeRango(inicio: Int, fin: Int): Int {
 //   calificacionLetra(101)  ->  "inválida"
 // =============================================================================
 fun calificacionLetra(nota: Int): String {
-    // TODO: tu solución aquí
-    TODO("tu solución aquí")
+    when (nota) {
+        in 90..100 -> return "A"
+        in 80..89 -> return "B"
+        in 70..79 -> return "C"
+        in 60..69 -> return "D"
+        in 0..59 -> return "F"
+        else -> return "inválida"
+    }
 }
 
 
@@ -202,8 +222,17 @@ fun calificacionLetra(nota: Int): String {
 //   tipoDeTriangulo(1, 2, 3)  ->  "inválido"
 // =============================================================================
 fun tipoDeTriangulo(a: Int, b: Int, c: Int): String {
-    // TODO: tu solución aquí
-    TODO("tu solución aquí")
+    if (a <= 0 || b <= 0 || c <= 0) {
+        return "inválido"
+    }
+    if (a >= b + c || b >= a + c || c >= a + b) {
+        return "inválido"
+    }
+    return when {
+        a == b && b == c -> "equilátero"
+        a == b || a == c || b == c -> "isósceles"
+        else -> "escaleno"
+    }
 }
 
 
