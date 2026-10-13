@@ -71,10 +71,10 @@ fun perimetroRectangulo(base: Int, altura: Int): Int {
 // RETRO: PISTA: no modifiques los parámetros; crea una variable NUEVA, por ejemplo `val suma = a + b + c`, conviértela con `.toDouble()` y divide entre `3` (o `3.0`). ¿Qué tipo tiene Double / Int? Pruébalo.
 // RETRO: (Revisé esta función con el compilador de Kotlin.)
 fun promedio(a: Int, b: Int, c: Int): Double {
-    a= a.toFloat()
-    b = b.toFloat()
-    c= c.toFloat()
-    return a+b+c/3
+    aD= a.toDouble()
+    bD = b.toDouble()
+    cD= c.toDouble()
+    return (aD+bD+cD)/3
 }
 
 // =============================================================================
@@ -116,12 +116,12 @@ fun mayorDeDos(a: Int, b: Int): Int {
 // RETRO: PISTA 1: cambia las comillas dobles por simples. PISTA 2: antes del `when` puedes pasar el carácter a minúscula con `c.lowercaseChar()`. PISTA 3: en `when` puedes juntar varias opciones con coma: `'a', 'e' -> ...`, así no repites 5 líneas.
 // RETRO: (Revisé esta función con el compilador de Kotlin.)
 fun esVocal(c: Char): Boolean {
-    when (c) {
-        "a" -> return true
-        "e" -> return true
-        "i" -> return true
-        "o" -> return true
-        "u" -> return true
+    when (c.lowercaseChar()) {
+        'a' -> return true
+        'e' -> return true
+        'i' -> return true
+        'o' -> return true
+        'u' -> return true
         else -> return false
     }
 }
