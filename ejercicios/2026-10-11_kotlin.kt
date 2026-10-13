@@ -28,6 +28,8 @@
 //   saludar("Jesús")  ->  "¡Hola, Jesús! Bienvenido a Kotlin"
 //   saludar("Ana")    ->  "¡Hola, Ana! Bienvenido a Kotlin"
 // =============================================================================
+// RETRO: Muy bien: usaste la plantilla `$nombre` dentro del string, justo lo que pedía el ejercicio, y funciona también con nombre vacío.
+// RETRO: Mejora opcional (estilo): como solo devuelves una expresión puedes escribir `fun saludar(nombre: String) = "¡Hola, $nombre! Bienvenido a Kotlin"`.
 fun saludar(nombre: String): String {
     return "¡Hola, $nombre! Bienvenido a Kotlin"
 }
@@ -42,6 +44,8 @@ fun saludar(nombre: String): String {
 //   perimetroRectangulo(3, 4)  ->  14
 //   perimetroRectangulo(5, 5)  ->  20
 // =============================================================================
+// RETRO: Correcto. La fórmula está bien y los paréntesis están donde deben.
+// RETRO: Mejora opcional: se puede escribir en una línea con cuerpo de expresión: `fun perimetroRectangulo(base: Int, altura: Int) = 2 * (base + altura)`.
 fun perimetroRectangulo(base: Int, altura: Int): Int {
     return 2 * (base + altura)
 }
@@ -58,6 +62,14 @@ fun perimetroRectangulo(base: Int, altura: Int): Int {
 //   promedio(10, 8, 9)  ->  9.0
 //   promedio(7, 8, 8)   ->  7.666666666666667
 // =============================================================================
+// RETRO: Aquí hay algo importante y todo el archivo NO compila por esta función (por eso el corredor ni siquiera arranca). Ojo: intentar convertir a Double antes de dividir es la idea correcta, ¡buena intuición!
+// RETRO: Qué falló, en orden:
+// RETRO:   1) Los parámetros de una función en Kotlin son `val`: no se pueden reasignar (`a = ...` da error 'val cannot be reassigned').
+// RETRO:   2) Aunque pudieras, `a` es Int y no puedes guardar un Float dentro de un Int (los tipos no cambian).
+// RETRO:   3) Se pide Double, y `toFloat()` da Float; el Double se obtiene con `.toDouble()`.
+// RETRO:   4) Precedencia: `a+b+c/3` divide solo `c` entre 3. Primero se suma todo y luego se divide: (a+b+c)/3.
+// RETRO: PISTA: no modifiques los parámetros; crea una variable NUEVA, por ejemplo `val suma = a + b + c`, conviértela con `.toDouble()` y divide entre `3` (o `3.0`). ¿Qué tipo tiene Double / Int? Pruébalo.
+// RETRO: (Revisé esta función con el compilador de Kotlin.)
 fun promedio(a: Int, b: Int, c: Int): Double {
     a= a.toFloat()
     b = b.toFloat()
@@ -76,6 +88,8 @@ fun promedio(a: Int, b: Int, c: Int): Double {
 //   mayorDeDos(3, 8)   ->  8
 //   mayorDeDos(10, 10) ->  10
 // =============================================================================
+// RETRO: Correcto, incluso en el empate (10 y 10). Tu `if/else` con `return` en cada rama funciona perfecto.
+// RETRO: Mejora opcional: el ejercicio pedía `if` como EXPRESIÓN, o sea que el `if` produce un valor: `return if (a >= b) a else b`. Es una forma muy típica de Kotlin; inténtala.
 fun mayorDeDos(a: Int, b: Int): Int {
     if (a >= b) {
         return a
@@ -97,6 +111,10 @@ fun mayorDeDos(a: Int, b: Int): Int {
 //   esVocal('E')  ->  true
 //   esVocal('z')  ->  false
 // =============================================================================
+// RETRO: Vas por buen camino con la estructura de `when`; el error es de tipos y por eso no compila: `c` es un Char y comparas contra "a" (String, comillas dobles). En Kotlin los Char van con comillas SIMPLES: 'a'.
+// RETRO: Segundo detalle: el ejemplo esVocal('E') debe dar true, y ahora solo reconocerías minúsculas.
+// RETRO: PISTA 1: cambia las comillas dobles por simples. PISTA 2: antes del `when` puedes pasar el carácter a minúscula con `c.lowercaseChar()`. PISTA 3: en `when` puedes juntar varias opciones con coma: `'a', 'e' -> ...`, así no repites 5 líneas.
+// RETRO: (Revisé esta función con el compilador de Kotlin.)
 fun esVocal(c: Char): Boolean {
     when (c) {
         "a" -> return true
@@ -122,6 +140,8 @@ fun esVocal(c: Char): Boolean {
 //   nombreDelDia(7)  ->  "domingo"
 //   nombreDelDia(9)  ->  "inválido"
 // =============================================================================
+// RETRO: Correcto: los 7 días, los acentos de 'miércoles' y 'sábado' bien escritos y el `else` para valores inválidos.
+// RETRO: Mejora opcional: `when` también es una expresión, así que puedes hacer `return when (numero) { 1 -> "lunes" ... else -> "inválido" }` y te ahorras cada `return`.
 fun nombreDelDia(numero: Int): String {
     when (numero) {
         1 -> return "lunes"
@@ -148,6 +168,7 @@ fun nombreDelDia(numero: Int): String {
 //   estaEnRango(10, 1, 10)  ->  true
 //   estaEnRango(11, 1, 10)  ->  false
 // =============================================================================
+// RETRO: Perfecto: `n in desde..hasta` es exactamente lo que se pedía y los extremos quedan incluidos. Nada que mejorar.
 fun estaEnRango(n: Int, desde: Int, hasta: Int): Boolean {
     return n in desde..hasta
 }
@@ -167,6 +188,8 @@ fun estaEnRango(n: Int, desde: Int, hasta: Int): Boolean {
 //   sumaDeRango(3, 3)  ->  3
 //   sumaDeRango(5, 1)  ->  0
 // =============================================================================
+// RETRO: Correcto. Manejaste el rango vacío antes de sumar (5..1) y `.sum()` hace el resto.
+// RETRO: Dato extra: aun sin tu `if`, `(5..1).sum()` ya da 0 porque el rango está vacío; tu verificación es válida y explícita, no está de más.
 fun sumaDeRango(inicio: Int, fin: Int): Int {
     if (inicio > fin) {
         return 0
@@ -189,6 +212,8 @@ fun sumaDeRango(inicio: Int, fin: Int): Int {
 //   calificacionLetra(70)   ->  "C"
 //   calificacionLetra(101)  ->  "inválida"
 // =============================================================================
+// RETRO: Correcto. Buen uso de `when` con `in` y rangos, y el `else` cubre notas fuera de 0..100.
+// RETRO: Mejora opcional: usa `return when (nota) { ... }` para evitar repetir `return` en cada rama.
 fun calificacionLetra(nota: Int): String {
     when (nota) {
         in 90..100 -> return "A"
@@ -221,6 +246,8 @@ fun calificacionLetra(nota: Int): String {
 //   tipoDeTriangulo(3, 4, 5)  ->  "escaleno"
 //   tipoDeTriangulo(1, 2, 3)  ->  "inválido"
 // =============================================================================
+// RETRO: ¡Muy buen trabajo en el ejercicio más difícil del lote! Validaste primero lados <= 0, luego la desigualdad triangular (con `>=`, que es lo correcto para el caso 1,2,3) y al final clasificaste. Ese orden es justo el truco.
+// RETRO: Mejora opcional: podrías juntar las dos validaciones en un `when` sin argumento, pero tu versión es clara y está bien.
 fun tipoDeTriangulo(a: Int, b: Int, c: Int): String {
     if (a <= 0 || b <= 0 || c <= 0) {
         return "inválido"
