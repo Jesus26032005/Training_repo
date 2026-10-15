@@ -62,14 +62,8 @@ fun perimetroRectangulo(base: Int, altura: Int): Int {
 //   promedio(10, 8, 9)  ->  9.0
 //   promedio(7, 8, 8)   ->  7.666666666666667
 // =============================================================================
-// RETRO: Aquí hay algo importante y todo el archivo NO compila por esta función (por eso el corredor ni siquiera arranca). Ojo: intentar convertir a Double antes de dividir es la idea correcta, ¡buena intuición!
-// RETRO: Qué falló, en orden:
-// RETRO:   1) Los parámetros de una función en Kotlin son `val`: no se pueden reasignar (`a = ...` da error 'val cannot be reassigned').
-// RETRO:   2) Aunque pudieras, `a` es Int y no puedes guardar un Float dentro de un Int (los tipos no cambian).
-// RETRO:   3) Se pide Double, y `toFloat()` da Float; el Double se obtiene con `.toDouble()`.
-// RETRO:   4) Precedencia: `a+b+c/3` divide solo `c` entre 3. Primero se suma todo y luego se divide: (a+b+c)/3.
-// RETRO: PISTA: no modifiques los parámetros; crea una variable NUEVA, por ejemplo `val suma = a + b + c`, conviértela con `.toDouble()` y divide entre `3` (o `3.0`). ¿Qué tipo tiene Double / Int? Pruébalo.
-// RETRO: (Revisé esta función con el compilador de Kotlin.)
+// RETRO: ¡Corregido y correcto! (Compilé y corrí el archivo completo: 10/10.) Creaste variables nuevas con `.toDouble()` y dividiste después de sumar, con los paréntesis bien puestos; justo lo que había que entender sobre `Int / Int`.
+// RETRO: Mejora opcional: no necesitas convertir los tres; basta `(a + b + c) / 3.0` (Int / Double da Double) o `(a + b + c).toDouble() / 3`.
 fun promedio(a: Int, b: Int, c: Int): Double {
     val aD= a.toDouble()
     val bD = b.toDouble()
@@ -111,10 +105,8 @@ fun mayorDeDos(a: Int, b: Int): Int {
 //   esVocal('E')  ->  true
 //   esVocal('z')  ->  false
 // =============================================================================
-// RETRO: Vas por buen camino con la estructura de `when`; el error es de tipos y por eso no compila: `c` es un Char y comparas contra "a" (String, comillas dobles). En Kotlin los Char van con comillas SIMPLES: 'a'.
-// RETRO: Segundo detalle: el ejemplo esVocal('E') debe dar true, y ahora solo reconocerías minúsculas.
-// RETRO: PISTA 1: cambia las comillas dobles por simples. PISTA 2: antes del `when` puedes pasar el carácter a minúscula con `c.lowercaseChar()`. PISTA 3: en `when` puedes juntar varias opciones con coma: `'a', 'e' -> ...`, así no repites 5 líneas.
-// RETRO: (Revisé esta función con el compilador de Kotlin.)
+// RETRO: ¡Corregido! Ahora usas Char con comillas simples y `lowercaseChar()` para aceptar mayúsculas: esVocal('E') da true. Todo compila y pasa.
+// RETRO: Mejora opcional: junta las vocales con comas y devuelve directo: `return when (c.lowercaseChar()) { 'a', 'e', 'i', 'o', 'u' -> true; else -> false }`. O incluso `c.lowercaseChar() in "aeiou"`.
 fun esVocal(c: Char): Boolean {
     when (c.lowercaseChar()) {
         'a' -> return true
